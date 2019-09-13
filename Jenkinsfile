@@ -1,24 +1,25 @@
 pipeline {
     agent any
-
-    environment {
-      HEROKU_API_KEY = '$HEROKU_API_KEY'
-    }
     stages {
-
         stage('Build') {
             steps {
                 sh './gradlew clean build'
             }
         }
 
+        stage('Artifact') {
+            steps {
+              dir("build/libs/") {
+               sh "pwd"
+                script {
+                  env.artifact = 'jenkins-poc-0.0.1-SNAPSHOT.jar'
+            }
+        }
+
         stage('Deploy') {
             steps {
-                image 'ruby:2.3'
-                sh 'apt update -qq'
-                sh 'apt install -qq -y ruby'
-                sh 'gem install -q dpl'
-                sh 'dpl --provider=heroku --app=jenkins-poc --api-key=$HEROKU_API_KEY'
+                sh "docker.build . jenkins-poc-app:0.0.1-SNAPSHOT","--build-arg JAR_FILE=${env.artifact} -f Dockerfile ."
+                sh 'docker run --name jenkins-poc-app jenkins-poc-app:0.0.1-SNAPSHOT'
             }
         }
     }
