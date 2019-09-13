@@ -10,9 +10,11 @@ pipeline {
         stage('Artifact') {
             steps {
               dir("build/libs/") {
-               sh "pwd"
+                sh "pwd"
                 script {
                   env.artifact = 'jenkins-poc-0.0.1-SNAPSHOT.jar'
+                }
+              }
             }
         }
 
