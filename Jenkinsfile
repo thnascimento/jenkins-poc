@@ -16,9 +16,14 @@ pipeline {
             }
         }
 
-        stage('Deploy') {
+        stage('Docker image') {
             steps {
                 sh 'docker.build . jenkins-poc-app:0.0.1-SNAPSHOT","--build-arg JAR_FILE=${env.artifact} -f Dockerfile .'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
                 sh 'docker run --name jenkins-poc-app jenkins-poc-app:0.0.1-SNAPSHOT'
             }
         }
