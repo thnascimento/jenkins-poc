@@ -1,5 +1,9 @@
 pipeline {
     agent any
+
+    environment {
+      HEROKU_API_KEY: '$HEROKU_API_KEY'
+    }
     stages {
 
         stage('Build') {
@@ -10,7 +14,6 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                HEROKU_API_KEY: '$HEROKU_API_KEY'
                 image 'ruby:2.3'
                 sh 'apt update -qq'
                 sh 'apt install -qq -y ruby'
