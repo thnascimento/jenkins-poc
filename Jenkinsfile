@@ -18,7 +18,7 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                sh "docker.build . jenkins-poc-app:0.0.1-SNAPSHOT","--build-arg JAR_FILE=${env.artifact} -f Dockerfile ."
+                sh 'docker.build . jenkins-poc-app:0.0.1-SNAPSHOT","--build-arg JAR_FILE=${env.artifact} -f Dockerfile .'
                 sh 'docker run --name jenkins-poc-app jenkins-poc-app:0.0.1-SNAPSHOT'
             }
         }
