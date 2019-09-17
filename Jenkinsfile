@@ -9,8 +9,10 @@ pipeline {
 
         stage('Deploy') {
             steps {
-              def serviceImage = docker.build("jenkins-poc:0.0.1","--build-arg JAR_FILE=/build/libs/jenkins-poc-0.0.1-SNAPSHOT.jar -f Dockerfile .")
-              serviceImage.run()
+               script {
+                def serviceImage = docker.build("jenkins-poc:0.0.1","--build-arg JAR_FILE=/build/libs/jenkins-poc-0.0.1-SNAPSHOT.jar -f Dockerfile .")
+                serviceImage.run()
+              }
 //               sh 'docker run jenkins-poc:0.0.1'
             }
         }
