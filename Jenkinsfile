@@ -1,9 +1,5 @@
 pipeline {
     agent any
-    tools {
-          gradle "Gradle-4.10.3"
-          jdk "jdk11"
-    }
     stages {
         stage('Build') {
             steps {
