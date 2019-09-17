@@ -6,7 +6,9 @@ plugins {
 
 group = 'br.com.dimed'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '1.8'
+
+sourceCompatibility = JavaVersion.VERSION_11
+targetCompatibility = JavaVersion.VERSION_11
 
 repositories {
 	mavenCentral()
