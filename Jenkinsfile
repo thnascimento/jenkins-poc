@@ -24,7 +24,7 @@ pipeline {
             steps {
               unstash 'artefato'
               script {
-                  def serviceImage = docker.build("${env.service}:${env.BUILD_ID}","--build-arg JAR_FILE=${env.artifact} -f Dockerfile .")
+                  sh 'docker build . ${env.service}:${env.BUILD_ID} --build-arg JAR_FILE=${env.artifact}'
                   sh 'docker run ${env.service}:${env.BUILD_ID}'
               }
             }
