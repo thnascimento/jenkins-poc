@@ -10,7 +10,7 @@ pipeline {
         stage('Deploy') {
             steps {
               sh 'docker build . --tag jenkins-poc:0.0.1 --build-arg JAR_FILE=/build/libs/jenkins-poc-0.0.1-SNAPSHOT.jar'
-              sh 'docker run -p 9000:9000 jenkins-poc:0.0.1'
+              sh 'docker run -d -p 9000:9000 jenkins-poc:0.0.1'
             }
         }
     }
